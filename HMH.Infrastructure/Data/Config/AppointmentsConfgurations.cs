@@ -38,10 +38,7 @@ namespace HMH.Infrastructure.Data.Config
                    .HasMaxLength(100);
 
            
-            builder.HasOne(a => a.Doctor)
-                   .WithMany(d => d.Appointments)
-                   .HasForeignKey(a => a.DoctorId)
-                   .OnDelete(DeleteBehavior.Cascade); 
+            
         }
     }
  

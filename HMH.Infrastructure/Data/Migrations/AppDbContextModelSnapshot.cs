@@ -58,7 +58,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("appointments");
+                    b.ToTable("appointments", (string)null);
                 });
 
             modelBuilder.Entity("HMH.core.Entites.Clinics", b =>
@@ -80,7 +80,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("clinics");
+                    b.ToTable("clinics", (string)null);
 
                     b.HasData(
                         new
@@ -128,7 +128,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasIndex("ClinicsId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
 
                     b.HasData(
                         new
@@ -170,7 +170,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("doctorSchedules");
+                    b.ToTable("doctorSchedules", (string)null);
 
                     b.HasData(
                         new
@@ -210,7 +210,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("ratings");
+                    b.ToTable("ratings", (string)null);
                 });
 
             modelBuilder.Entity("HMH.core.Entites.Notification", b =>
@@ -239,7 +239,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("notifications");
+                    b.ToTable("notifications", (string)null);
                 });
 
             modelBuilder.Entity("HMH.core.Entites.Offer", b =>
@@ -272,7 +272,7 @@ namespace HMH.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("offers");
+                    b.ToTable("offers", (string)null);
                 });
 
             modelBuilder.Entity("HMH.core.Entites.Appointments", b =>

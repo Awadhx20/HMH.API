@@ -18,8 +18,8 @@ namespace HMH.core.Entites.Dectors
         public int MaxAppointmentsPerDay { get; set; }
         public int DoctorId { get; set; }
 
-        // Navigation property
+        //// Navigation property
       
-        public Doctor  Doctor { get; set; }
+        //public Doctor  Doctor { get; set; }
     }
 }

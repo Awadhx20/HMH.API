@@ -35,31 +35,14 @@ namespace HMH.Infrastructure.Data.Config
             builder.Property(x => x.Experience)
                    .IsRequired();
 
-            builder.HasOne(x => x.Clinics)
-                   .WithMany(c => c.Doctors)
-                   .HasForeignKey(x => x.ClinicsId)
-                   .OnDelete(DeleteBehavior.Cascade);
+            
 
             
 
             
-            builder.HasMany(x => x.Ratings)
-                   .WithOne(x => x.Doctor)
-                   .HasForeignKey(x => x.DoctorId)
-                   .OnDelete(DeleteBehavior.Cascade);
-
+          
            
-            builder.HasMany(x => x.DoctorSchedules)
-                   .WithOne(x => x.Doctor)
-                   .HasForeignKey(x => x.DoctorId)
-                   .OnDelete(DeleteBehavior.Cascade);
-
-            
-            builder.HasMany(x => x.Appointments)
-                   .WithOne(x => x.Doctor)
-                   .HasForeignKey(x => x.DoctorId)
-                   .OnDelete(DeleteBehavior.Cascade);
-
+           
             builder.HasData(
                 new Doctor
                 {

@@ -19,8 +19,8 @@ namespace HMH.core.Entites.Dectors
         public int DoctorId { get; set; }
         // Navigation properties
         //public User User { get; set; }
-       
-        public Doctor Doctor { get; set; }
+        //[ForeignKey(nameof(DoctorId))]
+        //public Doctor Doctor { get; set; }=
         
     }
 }

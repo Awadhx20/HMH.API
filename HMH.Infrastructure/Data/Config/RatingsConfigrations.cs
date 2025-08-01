@@ -28,10 +28,7 @@ namespace HMH.Infrastructure.Data.Config
                    
 
             
-            builder.HasOne(r => r.Doctor)
-                   .WithMany(d => d.Ratings)
-                   .HasForeignKey(r => r.DoctorId)
-                   .OnDelete(DeleteBehavior.Cascade);
+           
         }
     }
 }

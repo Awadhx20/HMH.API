@@ -1,4 +1,6 @@
-﻿using HMH.core.Interfaces;
+﻿using AutoMapper;
+using HMH.core.Interfaces;
+using HMH.Core.Services;
 using HMH.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace HMH.Infrastructure.Repositories
     {
 
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly IimageserviceMangment _iimageserviceMangment;
         public IDoctorRepository doctorRepository { get; }
 
         public IDoctorScheduleRepository doctorScheduleRepository { get; }
@@ -25,18 +29,21 @@ namespace HMH.Infrastructure.Repositories
         public INotificationRepository notificationRepository { get; }
 
         public IOfferRepository offerRepository { get; }
-       
 
-        public UnitOfWork(AppDbContext context)
+
+        public UnitOfWork(AppDbContext context, IMapper mapper, IimageserviceMangment iimageserviceMangment )
         {
             this._context = context;
-            doctorRepository=new DoctorRepository(context);
+            _mapper = mapper;
+            _iimageserviceMangment = iimageserviceMangment;
+            doctorRepository = new DoctorRepository(context, _mapper, iimageserviceMangment);
             doctorScheduleRepository = new DoctorScheduleRepository(context);
             appointmentsRepository = new AppointmentsRepository(context);
             ratingRepository = new RatingRepository(context);
-            clinicsRepository = new ClinicsRepository(context);
+            clinicsRepository = new ClinicsRepository(context, _mapper, _iimageserviceMangment);
             notificationRepository = new NotificationRepository(context);
             offerRepository = new OfferRepository(context);
+           
         }
     }
 }

@@ -13,6 +13,6 @@ namespace HMH.core.Entites
     {
         public string Name { get; set; }
         public string Image { get; set; }
-        public ICollection<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
+       //public ICollection<Doctor> Doctors { get; set; } 
     }
 }

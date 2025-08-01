@@ -31,10 +31,7 @@ namespace HMH.Infrastructure.Data.Config
                    .IsRequired();
 
            
-            builder.HasOne(ds => ds.Doctor)
-                   .WithMany(d => d.DoctorSchedules)
-                   .HasForeignKey(ds => ds.DoctorId)
-                   .OnDelete(DeleteBehavior.Cascade);
+           
 
             builder.HasData(
                 new DoctorSchedule

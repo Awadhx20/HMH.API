@@ -29,10 +29,7 @@ namespace HMH.Infrastructure.Data.Config
                   
 
            
-            builder.HasMany(c => c.Doctors)
-                   .WithOne(d => d.Clinics)
-                   .HasForeignKey(d => d.ClinicsId)
-                   .OnDelete(DeleteBehavior.Cascade);
+        
             builder.HasData(
                 new Clinics { Id = 1, Name = "Test", Image = "testImage" });
         }
