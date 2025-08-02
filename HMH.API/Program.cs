@@ -1,4 +1,5 @@
 
+using HMH.API.Middleware;
 using HMH.Infrastructure;
 
 
@@ -12,7 +13,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.InfrastructureConfiguration(builder.Configuration);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
@@ -24,7 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
 }
-
+app.UseMiddleware<ExceptionsMiddleware>();
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
