@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMH.Core.Entites;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,12 +16,14 @@ namespace HMH.core.Entites.Dectors
         public int Stars { get; set; } // 1 إلى 5
         public string Comment { get; set; }
         public DateTime RatedAt { get; set; }
-        //public int UserId { get; set; }
+       
         public int DoctorId { get; set; }
+        public string UserId { get; set; }
         // Navigation properties
-        //public User User { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public ApplicationUser User { get; set; }
         //[ForeignKey(nameof(DoctorId))]
         //public Doctor Doctor { get; set; }=
-        
+
     }
 }

@@ -9,5 +9,6 @@ namespace HMH.core.Interfaces
 {
     public interface IDoctorScheduleRepository:IGenericRepository<DoctorSchedule>
     {
+        Task<bool> ExistsAsync(int doctorid, DayOfWeek DayInWeek);
     }
 }

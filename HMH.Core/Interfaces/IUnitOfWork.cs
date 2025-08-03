@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMH.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace HMH.core.Interfaces
         public IClinicsRepository clinicsRepository { get; }
         public INotificationRepository notificationRepository { get; }
         public IOfferRepository offerRepository { get; }
+        public IAuth Auth { get; }
     }
 }
     

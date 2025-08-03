@@ -13,8 +13,18 @@ namespace HMH.API.Mapping
                 .ReverseMap();
 
             CreateMap<AddDoctorDTO, Doctor>()
-                .ForMember(x => x.ClinicsId, op => op.MapFrom(x => x.ClinicsID))
+                .ForMember(x => x.ClinicsId, op => op.MapFrom(x => x.ClinicsId))
                 .ReverseMap();
+            //Dcotro sche
+            CreateMap<DoctorSchedule, DoctorScheduleDTO>()
+              .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
+              .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime))
+              .ReverseMap();
+
+            CreateMap<DoctorSchedule, updateDoctorScheduleDTO>()
+             .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
+             .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime))
+             .ReverseMap();
         }
     }
 }

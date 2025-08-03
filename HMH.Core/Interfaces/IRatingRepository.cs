@@ -9,6 +9,6 @@ namespace HMH.core.Interfaces
 {
     public interface IRatingRepository:IGenericRepository<Ratings>
     {
-        //
+        Task<float> CountOfDoctorRating(int DoctorId);
     }
 }

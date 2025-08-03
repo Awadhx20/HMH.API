@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,8 +31,9 @@ namespace HMH.Infrastructure.Data.Config
             builder.Property(ds => ds.MaxAppointmentsPerDay)
                    .IsRequired();
 
-           
-           
+
+            builder.HasIndex(s => new { s.DoctorId, s.DayOfWeek })
+            .IsUnique();
 
             builder.HasData(
                 new DoctorSchedule

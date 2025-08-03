@@ -4,9 +4,11 @@ using HMH.core.Entites.Dectors;
 using HMH.core.Interfaces;
 using HMH.Core.DTO;
 using HMH.Core.Services;
+using HMH.Core.Sharing;
 using HMH.Infrastructure.Data;
 using HMH.Infrastructure.Repositories.Service;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,5 +87,52 @@ namespace HMH.Infrastructure.Repositories
             return _context.clinics.Any(c => c.Id == id);
         }
 
+        private   decimal RatingofDoctor(int DoctorId)
+        {
+
+            List<Ratings> count =  _context.ratings.Where(d=>d.DoctorId==DoctorId).ToList();
+            if (count.Count==0) return 0;
+
+            decimal ratcount = 0;
+            foreach (var rat in count)
+            {
+                ratcount += rat.Stars;
+            }
+            return ratcount / count.Count();
+        }
+
+       
+        public async Task<IEnumerable<DoctorDTO>> GetAllAsync(DoctorParam param)
+        {
+            var query = _context.Doctors.Include(d => d.Clinics)
+                 .AsNoTracking();
+
+            if (param.clinicsId.HasValue)
+            {
+                query = query.Where(d => d.ClinicsId == param.clinicsId);
+            }
+            if(!string.IsNullOrEmpty(param.search))
+            {
+                var Searchword = param.search.Split(' ');
+                query = query.Where(m => Searchword.All(word =>
+                m.Name.ToLower().Contains(word.ToLower()) ||
+                m.Description.ToLower().Contains(word.ToLower())
+                ));
+            }
+
+            query = query.Skip(param.pageSize *(param.PageNumber - 1)).Take(param.pageSize);
+            
+
+            var result =  mapper.Map<List<DoctorDTO>>(query);
+            foreach (var doctor in result)
+            {
+                doctor.Rating = RatingofDoctor(doctor.Id);
+            }
+
+            //var result = mapper.Map<List<DoctorDTO>>(query);
+            return result;
+        }
+
+        
     }
 }

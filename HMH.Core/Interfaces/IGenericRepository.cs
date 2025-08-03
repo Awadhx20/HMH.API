@@ -18,5 +18,7 @@ namespace HMH.core.Interfaces
         Task UpdateAsync(T entity);
         Task DeleteAsync(int Id);
 
+        Task<int> CountAsync();
+
     }
 }
