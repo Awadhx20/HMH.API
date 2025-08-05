@@ -25,6 +25,10 @@ namespace HMH.API.Mapping
              .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime))
              .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime))
              .ReverseMap();
+
+            CreateMap<DoctorSchedule, AddDoctorScheduleDTO>().ReverseMap();
+
+
         }
     }
 }

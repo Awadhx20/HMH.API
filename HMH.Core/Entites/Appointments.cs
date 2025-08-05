@@ -12,17 +12,26 @@ namespace HMH.core.Entites
     public class Appointments:BaseEntity<int>
     {
         public DateTime AppointmentDate { get; set; } // تاريخ + وقت
-        public string Status { get; set; } // معلّق، مؤكد، ملغى ...
+        public AppointmentStatus Status { get; set; } // معلّق، مؤكد، ملغى ...
         public string Notes { get; set; }
         public DateTime CreatedAt { get; set; }     // تاريخ ووقت إنشاء الحجز
-        public string PatientName { get; set; }
+        public string?  PatientName { get; set; }
+        public int TurnNumber { get; set; }
         // Navigation properties
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public ApplicationUser User { get; set; }
         public int DoctorId { get; set; }
 
-     
-        //public Doctor  Doctor { get; set; }
+        [ForeignKey(nameof(DoctorId))]
+        public Doctor Doctor { get; set; }
     }
+
+    public enum  AppointmentStatus
+    {
+        Completed = 1,
+        Scheduled = 2,
+        Canceled = 3
+    }
+
 }

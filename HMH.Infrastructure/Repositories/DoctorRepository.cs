@@ -87,21 +87,18 @@ namespace HMH.Infrastructure.Repositories
             return _context.clinics.Any(c => c.Id == id);
         }
 
-        private   decimal RatingofDoctor(int DoctorId)
+        private decimal RatingOfDoctor(int doctorId)
         {
+            var ratings = _context.ratings.Where(r => r.DoctorId == doctorId);
 
-            List<Ratings> count =  _context.ratings.Where(d=>d.DoctorId==DoctorId).ToList();
-            if (count.Count==0) return 0;
+            if (!ratings.Any())
+                return 0m;
 
-            decimal ratcount = 0;
-            foreach (var rat in count)
-            {
-                ratcount += rat.Stars;
-            }
-            return ratcount / count.Count();
+            var avg = ratings.Average(r => r.Stars);
+            return Math.Round((decimal)avg, 2);
         }
 
-       
+
         public async Task<IEnumerable<DoctorDTO>> GetAllAsync(DoctorParam param)
         {
             var query = _context.Doctors.Include(d => d.Clinics)
@@ -126,13 +123,14 @@ namespace HMH.Infrastructure.Repositories
             var result =  mapper.Map<List<DoctorDTO>>(query);
             foreach (var doctor in result)
             {
-                doctor.Rating = RatingofDoctor(doctor.Id);
+                var rating = RatingOfDoctor(doctor.Id);
+                doctor.Rating = rating.ToString("F2");
             }
 
             //var result = mapper.Map<List<DoctorDTO>>(query);
             return result;
         }
 
-        
+       
     }
 }

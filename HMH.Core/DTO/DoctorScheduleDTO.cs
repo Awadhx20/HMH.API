@@ -25,6 +25,7 @@ namespace HMH.Core.DTO
         [Range(0, 6, ErrorMessage = "اليوم يجب أن يكون رقماً من 0 إلى 6 (الأحد إلى السبت).")]
       
         public DayOfWeek DayOfWeek { get; set; }
+       
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         [Range(1, 80, ErrorMessage = "عدد المواعيد يجب أن يكون رقماً صحيحاً أكبر من 0.")]

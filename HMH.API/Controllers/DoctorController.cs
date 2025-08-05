@@ -137,6 +137,44 @@ namespace HMH.API.Controllers
             
         }
 
+
+
+
+
+        [HttpGet("{doctorId}/available-dates")]
+        public async Task<IActionResult> GetAvailableDates(int doctorId, int daysAhead = 30)
+        {
+            try
+            {
+                var doctor = await work.doctorRepository.GetByIdAsync(
+                    doctorId,
+                    d => d.DoctorSchedules
+                );
+
+                if (doctor == null)
+                    return NotFound(new ResponseAPI(404, "Doctor not found"));
+
+                var doctorSchedules = doctor.DoctorSchedules.ToList();
+
+                var upcomingDates = work.doctorScheduleRepository
+                    .GenerateUpcomingDatesWithTimes(doctorSchedules, daysAhead);
+
+                var result = upcomingDates.Select(d => new AvailableDateDTO
+                {
+                    Day = ((DayOfWeek)d.DayOfWeek).ToString(),
+                    Date = d.Date.ToString("yyyy-MM-dd"),
+                    StartTime = d.StartTime,
+                    EndTime = d.EndTime,
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseAPI(400, ex.Message));
+            }
+        }
+
         [HttpPost("{doctorId}/schedules")]
         public async Task<IActionResult> AddSchedule(int doctorId,  AddDoctorScheduleDTO addDoctorSchedule)
         {

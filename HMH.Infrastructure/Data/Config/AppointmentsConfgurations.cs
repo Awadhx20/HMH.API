@@ -32,13 +32,12 @@ namespace HMH.Infrastructure.Data.Config
             builder.Property(a => a.CreatedAt)
                    .IsRequired();
 
-            
-            builder.Property(a => a.PatientName)
-                   .IsRequired()
-                   .HasMaxLength(100);
+           builder.Property(a => a.PatientName)
+            .HasMaxLength(100)
+            .IsRequired(false);
 
-           
-            
+
+
         }
     }
  

@@ -51,6 +51,19 @@ namespace HMH.Infrastructure.Repositories
             return await query.ToListAsync();
         }
 
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            foreach (var include in includeProperties)
+                query = query.Include(include);
+
+            return await query.ToListAsync();
+        }
+
         public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _context.Set<T>();

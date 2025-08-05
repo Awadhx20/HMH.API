@@ -18,7 +18,7 @@ namespace HMH.Core.DTO
 
         public int Experience { get; set; }
 
-        public decimal Rating { get; set; } 
+        public string Rating { get; set; } 
         public string Specialty { get; set; }
 
         public string ClinicsName { get; set; }
